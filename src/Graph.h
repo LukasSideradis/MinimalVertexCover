@@ -8,7 +8,8 @@ class Graph{
 		int edges;
 		std::vector<int> * data;
 	public:
-		Graph(const int v, const int e) : vertices{v}, edges{e} {
+		Graph(const int v, const int e) : vertices{v}{
+			this->edges = e;
 			if (vertices <= 0) {
 				throw "Vertices must be postive and greater than zero.\n";
 			}
@@ -19,11 +20,19 @@ class Graph{
 			delete [] data;
 		}
 
+		int getVertices() const {
+			return vertices;
+		}
+
 		void addEdge(const int vertex1, const int vertex2) {
 			if (vertex1 >= vertices || vertex2 >= vertices) {
 				return;
 			}
 			data[vertex1].push_back(vertex2);
 			data[vertex2].push_back(vertex1);
+		}
+
+		std::vector<int> & vertexNeighbour(int vertex) {
+			return data[vertex];
 		}
 };
